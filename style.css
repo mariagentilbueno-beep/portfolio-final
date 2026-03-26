@@ -1,0 +1,285 @@
+:root {
+    /* font-family: Noto, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;  */
+    --clr-text: hsl(0, 0%, 0%);
+    --clr-bg: hsl(0, 0%, 100%);
+    /* para que todos los navegadores puedan tener la fuente, metes el embed code de google fonts en <head> */
+    --text-font: "Noto Sans Mono", sans-serif;
+}
+
+* {
+    /* problema del modelo de caja css, que suma el borde de los elementos; para que no te sume el ancho de los elementos incluidos el padding y el border */
+    box-sizing: border-box;
+}
+
+body{
+margin: 0;
+padding: 0;
+/* para que sea la altura del viewport */
+min-height: 100vh;
+display: grid;
+/* para distribuir el espacio que ocupará header-main-footer , lo dejo como comentario porque ha sido uno de mis primeros errores y no quiero que se me olvide: el error estaba en que había muchísimo espacio en blanco y el resto del contenido estaba al final de la página; las fr reparten el espacio disponible, le estaba diciendo 200 veces el espacio de main a header... gafes del oficio*/
+grid-template-rows: auto 1fr auto;
+grid-template-areas: 
+"header"
+"main"
+"footer"
+;
+/* espacio entre las secciones */
+gap: 20px;
+font-family: var(--text-font);
+/* para que al hacer scroll lateral en la página de proyectos el contenido no se desborde */
+overflow-x: hidden;
+}
+
+ul {
+    /* para quitarle el punto a las listas */
+    list-style-type: none;
+}
+
+.header {
+    /* para hacer la disposición del header en fila con dos partes, al principio hice grid pero es más sencillo flex para lo que quiero */
+    display: flex;
+    justify-content: space-between;
+    /* esto me da problemas porque las columnas ocupan más espacio de la cuenta, flex solo el que necesita, así que lo cambio de grid a flex*/
+    /* para alinear entre sí los elementos del header al centro */
+    align-items: center;
+    /* con width:100% aseguras que ocupe todo el ancho */
+    width: 100%;
+    padding: 20px 5%;
+    box-sizing: border-box;
+    max-width: 100vw;
+    overflow: visible;
+}
+
+.header__content {
+    display: block;
+    /* grid-template-columns: 1fr 1fr 1fr; */
+    /* justify-content: space-between; */
+    /* para centrarlo */
+    /* place-items: center; */
+
+    /* quiero alinearlo a la izquierda, pero no funciona creo */
+    /* justify-content: left; */
+}
+
+ .header__list {
+     display: flex;
+     /* me ha costado conseguirlo, con esto le doy espacio a los elementos entre sí */
+     gap: 2em;
+     margin: 0;
+     padding: 0;
+ }
+
+/* para que se subraye la sección del header en la que se encuentre el usuario */
+#header__item_underline {
+    text-decoration: underline;
+}
+
+
+a {
+    /* para quitar el underline a los links */
+    text-decoration: none;
+    color: var(--clr-text);
+    /* transición suave, pero no la entiendo muy bien */
+    transition: text-decoration 0.3s ease;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* para quitar el underline de "portfolio" */
+h1 a:hover {
+    text-decoration: none;
+}
+
+footer {
+display: flex;
+justify-content: space-between;
+padding: 20px 5%;
+box-sizing: border-box;
+
+/* quiero que cada uno de los elementos esté centrado dentro de su contenedor */
+footer div {
+justify-content: center;
+}
+
+    .footer__icons {
+            height: 30px;
+        }
+
+        /* para centrar la justificación del texto del footer */
+      .footer__text {
+               text-align: center;
+                }
+
+    .footer__text_copy {
+        font-size: small;
+    }
+}
+
+
+/* AQUÍ HAY ALGO QUE NO CUADRA PORQUE LOS ELEMENTOS SE SUBEN Y NO SE CENTRAN -> ya he encontrado el problema: es redundante poner a una img la clase flex, porque es un elemento en línea, tendría que aplicar flex a main que es su ancestro, pero no consigo con eso el resultado que quiero*/
+/* main{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+} */
+
+.imagen-portada {
+    /* Para que no se salga de la pantalla */
+    max-width: 100%; 
+    height: auto;
+    /* puse flex al principio pensando  que el siguiente elemento se pusiera abajo , pero vi el fallo y lo corregí*/
+    display: block;
+}
+
+/* este es el breakpoint para mostrar img responsive, he decidido diseñar con mobile first, por lo que lo primero que se aplica será para móvil y después la condición para desktop */
+.img-desktop {
+    display: none;
+}
+
+.img-mobile {
+display: block;
+}
+
+@media (min-width: 768px) {
+    .img-desktop {
+        display: block;
+    }
+
+    .img-mobile {
+        display: none;
+    }
+}
+
+
+
+
+.about__section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    .about__section_img {
+        max-width: 100%;
+        width: clamp (450px, 50px, 1000px);
+    }
+}
+
+/* hay que definir la altura para permitir que el contenido se centre verticalmente */
+.about__distribution {
+    display: flex;
+
+    /* Centra verticalmente */
+    align-items: center;
+    
+    /* Centra horizontalmente */
+     justify-content: center;
+        
+    /* Ocupa todo el alto que le da el main */
+    height: 100%;
+       
+    width: 100%;
+}
+
+.about__section_article {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.contact__main {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+
+    .contact__main_link {
+        font-size: 3em;
+    }
+
+    /* a {
+        font-weight: bold;
+    } */
+
+}
+
+/* .section__slider {
+    display: flex;
+    align-items: center;
+} */
+section img {
+    height: 30vh;
+}
+ 
+    
+/* Lo siguiente es para la página de proyectos, para presentar cada uno con scroll lateral */
+
+.projects-track {
+    display: flex;
+    /* para apilarlas en móvil en columna */
+    flex-direction: column; 
+    gap: 20px;
+    padding: 40px 5%;
+    align-items: center;
+}
+
+/* para hacer scroll horizontal en desktop */
+@media (min-width: 768px) {
+    .projects-track {
+        flex-direction: row;
+        /* con esta declaración consigues scroll lateral */
+        overflow-x: auto;
+        /* con flex-start haces que las img estén pegadas al inicio de su contenedor*/
+        align-items: flex-start;
+    }
+}
+
+/* tarjeta de cada img */
+.project-card {
+    position: relative;
+    /* con esto evitas que se encojan para caber en la pantalla */
+    flex-shrink: 0;
+    width: 260px;
+    height: 340px;
+    border-radius: 8px;
+    /* recorta la img cuando se amplía en hover */
+    overflow: hidden;
+    display: block;
+}
+
+/* características de cada imagen */
+.project-card img {
+    /* con esto consigues que ocupen el 100% del ancho de la card */
+width: 100%;
+height: 100%;
+object-fit: cover;
+/* transición al aplicar cualquier cambio */
+transition: transform 0.4s ease;
+}
+
+/* efecto hover */
+.project-card:hover img{
+    /* con scale 1.06 agrandas el elemento un 6% más de su tamaño normal (que es =1), con overflow:hidden en la card recortas lo que se salga, para que el zoom ocurra hacia dentro sin romper el layout*/
+transform: scale(1.06);
+}
+
+/* etiqueta de cada proyecto */
+.project-info {
+    /* pegamos la info al fondo de la tarjeta */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px;
+}
+
+.project-info p {
+    margin: 0;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.project-info span {
+    font-size: 0.75em;
+    opacity: 0.8;
+}
