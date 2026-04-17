@@ -4,6 +4,9 @@
     --clr-bg: hsl(0, 0%, 100%);
     /* para que todos los navegadores puedan tener la fuente, metes el embed code de google fonts en <head> */
     --text-font: "Noto Sans Mono", sans-serif;
+    --text-size-footer: clamp(0.875rem, 0.7386rem+0.6818vw, 1.25rem);
+    --text-size-header: clamp(1rem, 0.8rem + 1vw, 1.5rem);
+    --padding-inline: clamp(1rem, -0.1429rem + 5.7143vw, 5rem);
 }
 
 * {
@@ -11,30 +14,30 @@
     box-sizing: border-box;
 }
 
-body{
-margin: 0;
-padding: 0;
-/* para que sea la altura del viewport */
-min-height: 100vh;
-display: grid;
-/* para distribuir el espacio que ocupará header-main-footer , lo dejo como comentario porque ha sido uno de mis primeros errores y no quiero que se me olvide: el error estaba en que había muchísimo espacio en blanco y el resto del contenido estaba al final de la página; las fr reparten el espacio disponible, le estaba diciendo 200 veces el espacio de main a header... gafes del oficio*/
-grid-template-rows: auto 1fr auto;
-grid-template-areas: 
-"header"
-"main"
-"footer"
-;
-/* espacio entre las secciones */
-gap: 20px;
-font-family: var(--text-font);
-/* para que al hacer scroll lateral en la página de proyectos el contenido no se desborde */
-overflow-x: hidden;
+body {
+    margin: 0;
+    padding: 0;
+    /* para que sea la altura del viewport */
+    min-height: 100vh;
+    display: grid;
+    /* para distribuir el espacio que ocupará header-main-footer , lo dejo como comentario porque ha sido uno de mis primeros errores y no quiero que se me olvide: el error estaba en que había muchísimo espacio en blanco y el resto del contenido estaba al final de la página; las fr reparten el espacio disponible, le estaba diciendo 200 veces el espacio de main a header... gafes del oficio*/
+    grid-template-rows: auto 1fr auto;
+    font-family: var(--text-font);
+    /* para que al hacer scroll lateral en la página de proyectos el contenido no se desborde */
+    overflow-x: hidden;
 }
 
 ul {
     /* para quitarle el punto a las listas */
     list-style-type: none;
 }
+
+main {
+    width: 100vw;
+    overflow: hidden;
+}
+
+/* HEADER */
 
 .header {
     /* para hacer la disposición del header en fila con dos partes, al principio hice grid pero es más sencillo flex para lo que quiero */
@@ -45,36 +48,32 @@ ul {
     align-items: center;
     /* con width:100% aseguras que ocupe todo el ancho */
     width: 100%;
-    padding: 20px 5%;
+    max-width: 100%;
     box-sizing: border-box;
-    max-width: 100vw;
-    overflow: visible;
+    overflow: hidden;
+    /* con flx-wrap he conseguido que no se desborde */
+    flex-wrap: wrap;
+    padding: 10px var(--padding-inline);
+    font-size: var(--text-size-header);
 }
 
 .header__content {
-    display: block;
-    /* grid-template-columns: 1fr 1fr 1fr; */
-    /* justify-content: space-between; */
-    /* para centrarlo */
-    /* place-items: center; */
+    display: flex;
+    flex-direction: row;
 
-    /* quiero alinearlo a la izquierda, pero no funciona creo */
-    /* justify-content: left; */
 }
 
- .header__list {
-     display: flex;
-     /* me ha costado conseguirlo, con esto le doy espacio a los elementos entre sí */
-     gap: 2em;
-     margin: 0;
-     padding: 0;
- }
+/* .header__list {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+} */
+
 
 /* para que se subraye la sección del header en la que se encuentre el usuario */
 #header__item_underline {
     text-decoration: underline;
 }
-
 
 a {
     /* para quitar el underline a los links */
@@ -93,25 +92,33 @@ h1 a:hover {
     text-decoration: none;
 }
 
-footer {
-display: flex;
-justify-content: space-between;
-padding: 20px 5%;
-box-sizing: border-box;
+/* FOOTER */
 
-/* quiero que cada uno de los elementos esté centrado dentro de su contenedor */
-footer div {
-justify-content: center;
-}
+footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 5%;
+    box-sizing: border-box;
+    font-size: var(--text-size-footer);
+
+    /* quiero que cada uno de los elementos esté centrado dentro de su contenedor */
+    footer div {
+        justify-content: center;
+    }
 
     .footer__icons {
-            height: 30px;
-        }
+        height: 30px;
+    }
 
-        /* para centrar la justificación del texto del footer */
-      .footer__text {
-               text-align: center;
-                }
+    /* para centrar la justificación del texto del footer */
+    .footer__text {
+        text-align: center;
+        margin: 0;
+    }
+
+    .footer__text p {
+        margin: 0;
+    }
 
     .footer__text_copy {
         font-size: small;
@@ -119,16 +126,9 @@ justify-content: center;
 }
 
 
-/* AQUÍ HAY ALGO QUE NO CUADRA PORQUE LOS ELEMENTOS SE SUBEN Y NO SE CENTRAN -> ya he encontrado el problema: es redundante poner a una img la clase flex, porque es un elemento en línea, tendría que aplicar flex a main que es su ancestro, pero no consigo con eso el resultado que quiero*/
-/* main{
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-} */
-
 .imagen-portada {
     /* Para que no se salga de la pantalla */
-    max-width: 100%; 
+    max-width: 100%;
     height: auto;
     /* puse flex al principio pensando  que el siguiente elemento se pusiera abajo , pero vi el fallo y lo corregí*/
     display: block;
@@ -140,25 +140,19 @@ justify-content: center;
 }
 
 .img-mobile {
-display: block;
-}
-
-@media (min-width: 768px) {
-    .img-desktop {
-        display: block;
-    }
-
-    .img-mobile {
-        display: none;
-    }
+    display: block;
 }
 
 
-
+/* ABOUT */
 
 .about__section {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    /* en móvil 1 columna y en desktop 2 */
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: center;
+    padding: 1rem var(--padding-inline);
 
     .about__section_img {
         max-width: 100%;
@@ -172,14 +166,23 @@ display: block;
 
     /* Centra verticalmente */
     align-items: center;
-    
+
     /* Centra horizontalmente */
-     justify-content: center;
-        
+    justify-content: center;
+
     /* Ocupa todo el alto que le da el main */
     height: 100%;
-       
+
     width: 100%;
+}
+
+.about__section_img {
+    width: calc(100% - 10px);
+    max-width: 500px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+
 }
 
 .about__section_article {
@@ -207,79 +210,177 @@ display: block;
     display: flex;
     align-items: center;
 } */
-section img {
-    height: 30vh;
-}
- 
-    
+
+
+/* PROJECTS */
 /* Lo siguiente es para la página de proyectos, para presentar cada uno con scroll lateral */
+.main__projects {
+    width: 100%;
+    height: auto;
+}
+
+.sticky-container {
+    position: relative;
+    /* No es sticky en móvil */
+    display: block;
+}
 
 .projects-track {
     display: flex;
     /* para apilarlas en móvil en columna */
-    flex-direction: column; 
-    gap: 20px;
-    padding: 40px 5%;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem var(--padding-inline);
     align-items: center;
-}
-
-/* para hacer scroll horizontal en desktop */
-@media (min-width: 768px) {
-    .projects-track {
-        flex-direction: row;
-        /* con esta declaración consigues scroll lateral */
-        overflow-x: auto;
-        /* con flex-start haces que las img estén pegadas al inicio de su contenedor*/
-        align-items: flex-start;
-    }
+    flex-wrap: nonrap;
 }
 
 /* tarjeta de cada img */
 .project-card {
+    display: flex;
+    flex-direction: column;
     position: relative;
     /* con esto evitas que se encojan para caber en la pantalla */
     flex-shrink: 0;
-    width: 260px;
-    height: 340px;
-    border-radius: 8px;
-    /* recorta la img cuando se amplía en hover */
-    overflow: hidden;
-    display: block;
+    width: 100%;
+    max-width: 250px;
+    ;
+    text-decoration: none;
+}
+
+.project-card:hover {
+    text-decoration: none;
 }
 
 /* características de cada imagen */
 .project-card img {
     /* con esto consigues que ocupen el 100% del ancho de la card */
-width: 100%;
-height: 100%;
-object-fit: cover;
-/* transición al aplicar cualquier cambio */
-transition: transform 0.4s ease;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    /* transición al aplicar cualquier cambio */
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    display: block;
 }
 
 /* efecto hover */
-.project-card:hover img{
+.project-card:hover img {
     /* con scale 1.06 agrandas el elemento un 6% más de su tamaño normal (que es =1), con overflow:hidden en la card recortas lo que se salga, para que el zoom ocurra hacia dentro sin romper el layout*/
-transform: scale(1.06);
+    transform: scale(1.04);
+    text-decoration: none;
 }
 
 /* etiqueta de cada proyecto */
 .project-info {
-    /* pegamos la info al fondo de la tarjeta */
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 16px;
+    padding: 1rem 0;
+    text-align: left;
+    width: 100%;
 }
 
 .project-info p {
     margin: 0;
     font-weight: bold;
     font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
+
 .project-info span {
-    font-size: 0.75em;
+    font-size: 0.75rem;
     opacity: 0.8;
+    display: block;
+}
+
+
+@media (min-width: 768px) {
+    .img-desktop {
+        display: block;
+    }
+
+    .img-mobile {
+        display: none;
+    }
+
+    /* ABOUT */
+    /* Texto */
+    .about__section {
+        grid-template-columns: 1fr 1.2fr;
+    }
+
+
+    /* PROJECTS */
+    body.body_projects {
+        display: block !important;
+        /* Quitamos el grid para evitar conflictos */
+        overflow: hidden;
+        width: 100%;
+        margin: 0;
+    }
+
+    /* como el header y el footer se desbordaban, me parecía más fácil asegurarlo aquí directamente para que no se rompa la animación por tocar lo que no es */
+    header,
+    footer {
+        width: 100%;
+        max-width: 100vw;
+        position: relative;
+        z-index: 10;
+        /* Para que siempre estén por encima del track */
+        background-color: var(--clr-bg);
+        /* Evita que se vea el track por debajo */
+    }
+
+    .main__projects {
+        position: relative;
+        display: block;
+        width: 100%;
+        overflow: visible;
+        /* Obligamos al main a ocupar toda la pantalla */
+        /* display: flex;
+            align-items: center; */
+        /* Centrado vertical */
+        /* justify-content: center; */
+        /* Centrado horizontal (opcional, pero ayuda) */
+        /* overflow: hidden;
+            position: relative; */
+    }
+
+    .sticky-container {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        /* CENTRADO VERTICAL */
+        overflow: hidden;
+    }
+
+    .projects-track {
+        flex-direction: row;
+        /* overflow-x: hidden; */
+        flex-wrap: nowrap;
+        /* width: fit-content; */
+        padding: 0 10vw;
+        gap: 5vw;
+        /* justify-content: flex-start;
+        align-items: flex-start;
+        gap: 4rem; */
+        /* espacio para la barra de scroll */
+        /* padding-bottom: 3rem; */
+        /* ocultar barra scroll */
+        /* scrollbar-width: none;
+        -ms-overflow-style: none; */
+        /* margin: 0; */
+    }
+
+    .projects-track::-webkit-scrollbar {
+        display: none;
+    }
+
+    .project-card {
+        width: 30vh;
+        min-width: 250px;
+        flex-shrink: 0;
+        /* Evita que las tarjetas se aplasten */
+        max-width: none;
+    }
 }

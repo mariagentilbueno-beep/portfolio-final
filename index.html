@@ -22,19 +22,19 @@
             <nav class="header__content">
                 <ul class="header__list">
                     <li>
-                        <a href="projects.html" class="header__list_item">
+                        <a href="projects/index.html" class="header__list_item">
                             <span>Projects</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="about.html" class="header__list_item">
+                        <a href="about/index.html" class="header__list_item">
                             <span>About</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="contact.html" class="header__list_item">
+                        <a href="contact/index.html" class="header__list_item">
                             <span>Contact</span>
                         </a>
                     </li>
@@ -45,11 +45,18 @@
     </header>
 
     <main>
-        <!-- doy dos clases, una para los estilos globales (la comparten ambas img) y una individual para hacer mediaquery -->
+        <!-- doy dos clases, una para los estilos globales (la comparten ambas img) y una individual para hacer mediaquery  -->
         <img src="assets/img/img-home.webp" alt="Imagen portada" class="imagen-portada img-desktop">
         <img src="assets/img/img-home-responsive.webp" alt="Imagen portada" class="imagen-portada img-mobile">
     </main>
 
+    <!-- aplico la notación moderna de las media queries que me ha sugerido cristian para que las img se adapten con picture al ancho del dispositivo sin necesidad de css, no me funciona xd-->
+
+    <!-- <picture>
+        <source media="(width <= 450px)" src="assets/img/img-home-responsive.webp">
+        <source media="(451px <= width <= 768px)" src="assets/img/img-home-responsive.webp">
+        <source media="(769px <= width <= 1024px)" src="assets/img/img-home.webp">
+    </picture> -->
 
     <footer>
         <div class="footer__email">
