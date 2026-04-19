@@ -256,7 +256,6 @@ footer {
 .project-card img {
     /* con esto consigues que ocupen el 100% del ancho de la card */
     width: 100%;
-    aspect-ratio: 3 / 4;
     object-fit: cover;
     /* transición al aplicar cualquier cambio */
     transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
@@ -268,6 +267,10 @@ footer {
     /* con scale 1.06 agrandas el elemento un 6% más de su tamaño normal (que es =1), con overflow:hidden en la card recortas lo que se salga, para que el zoom ocurra hacia dentro sin romper el layout*/
     transform: scale(1.04);
     text-decoration: none;
+}
+
+.project-disc {
+    visibility: hidden;
 }
 
 /* etiqueta de cada proyecto */
@@ -347,6 +350,7 @@ footer {
 
     .sticky-container {
         width: 100%;
+        /* con height 100% consigo que quede centrado en la pantalla al hacerse el scroll */
         height: 100vh;
         display: flex;
         align-items: center;
@@ -383,4 +387,69 @@ footer {
         /* Evita que las tarjetas se aplasten */
         max-width: none;
     }
+
+    .card-media {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        /* para permitir que el disco sobresalga */
+        overflow: visible;
+    }
+
+    .project-cover {
+        position: relative;
+        /* para ponerlo por encima del disco */
+        z-index: 2;
+        width: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    #project-cover__motel {
+        
+    }
+
+    .project-disc {
+        position: absolute;
+        visibility: visible;
+        top: 5%;
+        right: 0;
+        width: 90%;
+        height: 90%;
+        /* para ponerlo por debajo de la carátula */
+        z-index: 1;
+        transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .project-disc img {
+        width: 100%;
+        object-fit: cover;
+        transform-origin: center center;
+    }
+
+    /* Efecto hover para abrir la carátula y que aparezca el disco */
+    .project-card:hover .project-cover {
+        transform: translateX(-20%);
+    }
+
+    .project-card:hover .project-disc {
+        transform: translateX(30%);
+    }
+
+        @keyframes spin-center {
+            from {
+                    transform: rotate(0deg);
+                }
+            
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+    
+        .project-card:hover .project-disc img {
+            /* Mantiene el desplazamiento y añade rotación infinita */
+            animation: spin-center 3s linear infinite;
+            animation-delay: 0.01s;
+            /* Espera a que termine de salir para empezar a girar */
+        }
 }
