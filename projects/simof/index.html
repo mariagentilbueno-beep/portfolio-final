@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../style.css">
+    <title>Projects - Editorial fotográfica - Simof</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <h1>
+                <a href="../../index.html">
+                    <span>Portfolio</span>
+                </a>
+            </h1>
+            <nav class="header__content">
+                <ul class="header__list">
+                    <li>
+                        <a href="../../projects/index.html" class="header__list_item">
+                            <span>Projects</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="../../about/index.html" class="header__list_item">
+                            <span>About</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="../../contact/index.html" class="header__list_item">
+                            <span>Contact</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="editorial">
+        <section class="editorial__intro editorial-step">
+            <div class="editorial__container">
+                <div class="editorial__details">
+                    <div class="editorial__details_1">
+                        <div class="editorial__details_container">
+                            <p class="strong">Brand</p>
+                            <p class="text-details">Simof</p>
+                        </div>
+
+                        <div class="editorial__details_container">
+                            <p class="strong">Year</p>
+                            <p class="text-details">2026</p>
+                        </div>
+
+                        <div class="editorial__details_container">
+                            <p class="strong">Discipline</p>
+                            <p class="text-details">Photography</p>
+                        </div>
+                    </div>
+
+                    <div class="editorial__details_2 editorial__details_container">
+                        <p class="strong">Description</p>
+                        <p class="text-details">
+                            Editorial coverage for the International Flamenco Fashion Week (SIMOF 2026). Capturing the essence of flamenco fashion
+                            through light and motion on the runway.
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="editorial__gallery editorial-step">
+            <div class="gallery__item">
+                <img src="../../assets/img/img-av-simof-1.webp" alt="Simof 01">
+            </div>
+
+            <div class="gallery__item">
+                <img src="../../assets/img/img-av-simof-2.webp" alt="Simof 02">
+            </div>
+
+           <div class="gallery__item">
+                <img src="../../assets/img/img-av-simof-3.webp" alt="Simof 03">
+            </div>
+
+            <div class="gallery__item">
+                <img src="../../assets/img/img-av-simof-4.webp" alt="Simof 04">
+            </div>
+
+            <div class="gallery__item">
+                <img src="../../assets/img/img-av-simof-5.webp" alt="Simof 05">
+            </div>
+
+            <div class="gallery__item">
+                <img src="../../assets/img/img-av-simof-6.webp" alt="Simof 06">
+            </div>
+
+            <div class="gallery__item">
+                <img src="../../assets/img/img-av-simof-7.webp" alt="Simof 07">
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="footer__email">
+            <a href="mailto:maria.gentil.bueno@gmail.com">
+                <span>Say hi!</span>
+            </a>
+        </div>
+
+        <div class="footer__text">
+            <p>Concept thinker. <br> Creative maker.</p>
+            <p class="footer__text_copy">&copy María Gentil 2026</p>
+        </div>
+
+        <div class="footer__icons">
+            <a href="https://www.linkedin.com/in/mariagentil/">
+                <img src="../../assets/icons/icon-linkedin.svg" alt="Icono Linkedin" class="footer__icons">
+            </a>
+
+            <a href="https://www.instagram.com/bymerygentil?igsh=NXA0N252anNlNWxo&utm_source=qr">
+                <img src="../../assets/icons/icon-instagram.svg" alt="Icono instagram" class="footer__icons">
+            </a>
+
+        </div>
+    </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Solo aplicamos el efecto de "pisado" en pantallas grandes
+        let mm = gsap.matchMedia();
+
+        mm.add("(min-width: 768px)", () => {
+            // Fijamos la sección de introducción
+            ScrollTrigger.create({
+                trigger: ".editorial__intro",
+                start: "top top",
+                pin: true,           // Se queda fija
+                pinSpacing: false,    // Permite que la galería suba por encima
+                endTrigger: ".editorial__gallery", // Termina cuando la galería cubra todo
+                end: "top top"
+            });
+        });
+    </script>
+
+</body>
+
+</html>
