@@ -24,6 +24,20 @@
     font-family: var(--text-font-text);
 }
 
+.padding-inline {
+    width: var(--padding-inline);
+}
+
+.centered {
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    width: 100%;
+}
+
+.hidden {
+    display: none;
+}
 
 
 * {
@@ -54,6 +68,11 @@ main {
     overflow: hidden;
 }
 
+#padding {
+    padding-top: 10rem;
+    width: 100vw;
+    overflow: hidden;
+}
 /* HEADER */
 
 .header {
@@ -75,6 +94,19 @@ main {
     position: fixed;
     z-index: 999;
     background-color: var(--clr-bg);
+}
+
+.header-index {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    flex-wrap: wrap;
+    padding: 2px var(--padding-inline);
+    font-size: var(--text-size-header);
 }
 
 .header__content {
@@ -248,7 +280,7 @@ footer {
     /* para apilarlas en móvil en columna */
     flex-direction: column;
     gap: 2rem;
-    padding: 2rem var(--padding-inline);
+    padding: 9rem var(--padding-inline);
     align-items: center;
     flex-wrap: nonrap;
 }
@@ -321,6 +353,7 @@ footer {
     gap: 2rem;
     align-items: center;
     padding: 1rem var(--padding-inline);
+    align-items: center;
 }
 .projects__section_youtube {
     width: 100%;
@@ -403,13 +436,90 @@ footer {
 
 .editorial__gallery-simof {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
     padding: 1rem;
     background-color: var(--clr-bg);
     position: relative;
     z-index: 2;
 }
+
+/* Bloom */
+.bloom__logo {
+    width: clamp(100px, 100%, 300px);
+}
+
+.bloom__logo img {
+    width: 100%;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    padding: 0, var(--padding-inline);
+}
+
+/* se queda huérfana 1 foto, no consigo arreglarlo */
+
+
+.gallery__item_2 {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+}
+
+.gallery__item_2 img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.slider-section {
+    padding: 4rem 0;
+    overflow: hidden;
+}
+
+.slider-wrapper {
+    position: relative;
+    width: 100%;
+    padding: 0 var(--padding-inline);
+}
+
+.slider-track {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+.slider-track::-webkit-scrollbar {
+    display: none;
+    /* Oculta scrollbar en Chrome/Safari */
+}
+
+.slide {
+    flex: 0 0 80%;
+    /* En móvil se ve una foto y un trozo de la siguiente */
+    scroll-snap-align: center;
+    aspect-ratio: 9 / 16;
+    /* O 2/3 si son verticales */
+}
+
+.slide img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.slider-controls {
+    display: none;
+}
+
 
 
 @media (min-width: 768px) {
@@ -502,6 +612,7 @@ footer {
         flex-shrink: 0;
         /* Evita que las tarjetas se aplasten */
         max-width: none;
+        padding: 2rem, var(--padding-inline);
     }
 
     .card-media {
@@ -591,38 +702,119 @@ footer {
         }
     
         .editorial__gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             position: relative;
             z-index: 2;
             /* Para que pase por encima del texto */
             background-color: var(--clr-bg);
             /* Fondo sólido para tapar el texto */
-    
-            /* La Magia del Flex Gallery */
             flex-direction: row;
             flex-wrap: wrap;
-            gap: 1.5rem;
+            gap: 2px;
             padding: 4rem var(--padding-inline);
         }
     
         .gallery__item {
-            /* Esto hace que las fotos intenten ocupar el 45% del ancho */
-            /* Pero el 'flex-grow: 1' las estira para rellenar huecos */
-            aspect-ratio: 4 / 8;
-            padding-bottom: 10rem
+            padding-bottom: 1rem
         }
     
         .gallery__item img {
-            height: 100%;
-            max-height: 80vh;
+            width: 100%;
+            height: 500px;
         }
 
         .editorial__gallery-simof {
-            grid-template-columns: repeat(4, 1fr);
-            grid-auto-rows: 250px;
+            grid-template-columns: repeat(4, 2fr);
             gap: 1.5rem;
             padding: 4rem var(--padding-inline);
+            aspect-ratio: 3 / 4;
         }
-        
+            
+        /* Bloom */
+
+    .gallery-grid-10 {
+        grid-template-columns: repeat(10, 1fr);
+        gap: 1rem;
+    }
+
+    .gallery__item_2:hover img{
+        transform: scale(1.02);
+    }
+
+    .gallery-grid-4 {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+    }
+
+    .gallery-grid-4 img {
+        object-fit: cover;
+    }
+
+    .slide {
+        flex: 0 0 45%; /* Se ven dos fotos y media */
+    }
+
+    .slider-controls {
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        top: 50%;
+        left: 20px;
+        right: 20px;
+        transform: translateY(-50%);
+        pointer-events: none; /* Para que no bloqueen el click en las fotos */
+    }
+
+    .control-btn {
+        pointer-events: all;
+        background: var(--clr-bg);
+        border: 0.5px solid var(--clr-text);
+        padding: 1rem;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .control-btn:hover {
+        background: var(--clr-text);
+        color: var(--clr-bg);
+    }
+
+.slide {
+    flex: 0 0 45%;
+    /* Se ven dos fotos y media */
+    max-width: 300px;
+}
+
+.slider-controls {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    right: 20px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    /* Para que no bloqueen el click en las fotos */
+}
+
+.control-btn {
+    pointer-events: all;
+    background: var(--clr-bg);
+    border: 1px solid var(--clr-text);
+    padding: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.control-btn:hover {
+    background: var(--clr-text);
+    color: var(--clr-bg);
+}
+
+.hidden {
+    display: flex;
+}
 }
 
 

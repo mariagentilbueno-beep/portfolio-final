@@ -75,7 +75,7 @@
 
          <a href="../projects/motel/index.html" class="project-card">
             <div class="card-media">
-                <div class="project-disc">
+                <div class="project-disc" style="width: 80%">
                     <img src="../assets/img/img-disco.webp" alt="Disco">
                 </div>
 
@@ -85,6 +85,14 @@
                     <span>Cortometraje | Audiovisual</span>
                 </div>
             </div>
+            </a>
+
+            <a href="../projects/bloom/index.html" class="project-card">
+                <img src="../assets/img/img-branding-bloom-portada.webp" alt="Bloom">
+                <div class="project-info">
+                    <p>Bloom</p>
+                    <span>Rebranding</span>
+                </div>
             </a>
         
              <a href="../projects/simof/index.html" class="project-card">
@@ -103,29 +111,15 @@
                     </div>
                 </a>
 
-                <a href="../projects/futbol mas/index.html" class="project-card">
-                    <img src="../assets/img/img-av-futbol-portada.webp" alt="Futbol mas">
-                    <div class="project-info">
-                        <p>Fútbol Más España</p>
-                        <span>Editorial fotográfica | Voluntariado</span>
-                    </div>
-                </a>
-
-                <a href="../projects/bloom/index.html" class="project-card">
-                    <img src="../assets/img/img-branding-bloom-portada.webp" alt="Bloom">
-                    <div class="project-info">
-                        <p>Bloom</p>
-                        <span>Rebranding</span>
-                    </div>
-                </a>
-
                 <a href="../projects/panar/index.html" class="project-card">
                     <img src="../assets/img/img-branding-panar-portada.webp" alt="Panar">
                     <div class="project-info">
                         <p>Panar</p>
-                        <span>Diseño UX/UI</span>
+                        <span>UX / UI</span>
                     </div>
                 </a>
+                
+
     </div>
 </main>
 
@@ -166,6 +160,7 @@
     mm.add("(min-width: 768px)", () => {
         const track = document.querySelector('.projects-track');
         const main = document.querySelector('.main__projects');
+        const header = document.querySelector('header');
 
         // Calculamos el ancho real del contenido
         let scrollAmount = track.scrollWidth - window.innerWidth;
@@ -177,8 +172,8 @@
                 trigger: main,      // El disparador es el main
                 pin: true,          // GSAP creará el "sticky" por nosotros
                 scrub: 1,           // Suavizado
-                start: "top top",   // Empieza cuando el main toca el techo
-                end: () => `+=${scrollAmount}`, // Dura lo que miden los proyectos
+                start: "top " + header.offsetHeight + "px",   // Empieza cuando el main toca el techo
+                end: () => "+=" + scrollAmount,
                 invalidateOnRefresh: true,
             }
         });
